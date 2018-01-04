@@ -7,6 +7,8 @@ const $ = require("jquery");
 planck.testbed(function(testbed) {
   $('canvas').attr('id','stage');
 
+  weatherGet();
+
   var pl = planck, Vec2 = pl.Vec2, Math = pl.Math;
   var SPI4 = Math.sin(Math.PI / 4), SPI3 = Math.sin(Math.PI / 3);
 
@@ -272,7 +274,7 @@ planck.testbed(function(testbed) {
     var gravityX = 50;
     var gravityY = 50;
 
-    windDataSet(gravityX,gravityY);
+    // windDataSet(gravityX,gravityY);
 
     // ボールが動いている間
     if(Math.sqrt(Math.round(v.x)) != 0 || Math.sqrt(Math.round(v.y)) != 0){
@@ -341,8 +343,70 @@ planck.testbed(function(testbed) {
   //   return balls;
   // }
 
-  function windDataSet(x,y){
-    $('#wind_data').html("現在の風向きは追い風"+x+"・横風"+y+"です");
+  // OpwnWeatherMapの利用
+  function weatherGet(){
+    const apiKey = '8032c7477be265800cfe8035f5c084f0'
+    const city = 'Tokyo';
+    const url = 'http://api.openweathermap.org/data/2.5/forecast?q=' + city + ',jp&units=metric&APPID=' + apiKey;
+
+    $.ajax({
+      url: url,
+      dataType: "json",
+      type: 'GET',
+    })
+    .done(function(data){
+      var weatherInfo   = weatherEnToJp(data.list[0].weather[0].main);
+      var windSpeedInfo = windSpeedDataSet(data.list[0].wind.speed);
+      var windDegInfo   = windDegDataSet(data.list[0].wind.deg);
+
+      console.log('成功');
+      console.log("東京の天気は"+weatherInfo);
+      console.log("風の強さは"+windSpeedInfo+"/風向きは"+windDegInfo);
+      $('#weather_data').html(city+"の天気は"+weatherInfo+"です");
+    })
+    .fail(function(data){
+      console.log('成功');
+    });
+  }
+
+  // 天気(clear,clouds,rain,snow)を英語から日本語へ変換
+  function weatherEnToJp(weather){
+    if(weather === "Clear"){
+      return "晴れ";
+    }else if(weather === "Clouds"){
+      return "曇り";
+    }else if(weather === "Rain"){
+      return "雨";
+    }else if(weather === "Snow"){
+      return "雪";
+    }else{
+      return "雨";
+    }
+  }
+
+  function windSpeedDataSet(windSpeed){
+    // 仮
+    return windSpeed*8;
+  }
+
+  function windDegDataSet(windDeg){
+    if(337.5 <= windDeg || windDeg < 22.5){
+      return "北";
+    }else if(22.5 <= windDeg || windDeg < 67.5){
+      return "北東";
+    }else if(67.5 <= windDeg || windDeg < 112.5){
+      return "東";
+    }else if(112.5 <= windDeg || windDeg < 157.5){
+      return "南東";
+    }else if(157.5 <= windDeg || windDeg < 202.5){
+      return "南";
+    }else if(202.5 <= windDeg || windDeg < 247.5){
+      return "南西";
+    }else if(247.5 <= windDeg || windDeg < 292.5){
+      return "西";
+    }else if(292.5 <= windDeg || windDeg < 337.5){
+      return "北西";
+    }
   }
 
   function scale(x, y) {
