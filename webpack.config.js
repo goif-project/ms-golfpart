@@ -44,9 +44,19 @@ module.exports = {
 
   plugins: [
     new htmlWebpackPlugin({
-      title:    'INDEX',
-      filename: 'index.html',
-      template: './pug/index.pug'
+      title:    'page1',
+      filename: 'page1.html',
+      template: './pug/page1.pug'
+    }),
+    new htmlWebpackPlugin({
+      title:    'page2',
+      filename: 'page2.html',
+      template: './pug/page2.pug'
+    }),
+    new htmlWebpackPlugin({
+      title:    'page3',
+      filename: 'page3.html',
+      template: './pug/page3.pug'
     }),
     new htmlWebpackPlugin({
       title: 'AGO',
