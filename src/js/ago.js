@@ -362,7 +362,7 @@ planck.testbed(function(testbed) {
       console.log('成功');
       console.log("東京の天気は"+weatherInfo);
       console.log("風の強さは"+windSpeedInfo+"/風向きは"+windDegInfo);
-      $('#weather_data').html(city+"の天気は"+weatherInfo+"です");
+      $('#weather_data').html(city+"の天気は"+weatherInfo+"です<br>風の強さは"+windSpeedInfo+"/風向きは"+windDegInfo);
     })
     .fail(function(data){
       console.log('成功');
