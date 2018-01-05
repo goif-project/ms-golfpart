@@ -1,6 +1,7 @@
 // ago.js
 // Written by Daichi Seki.
-const $ = require("jquery");
+const $    = require("jquery");
+const swal = require("sweetalert");
 
 /////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////
@@ -10,7 +11,8 @@ planck.testbed(function(testbed) {
   var pl = planck, Vec2 = pl.Vec2, Math = pl.Math;
   var SPI4 = Math.sin(Math.PI / 4), SPI3 = Math.sin(Math.PI / 3);
 
-  var gravityX,gravityY;
+  var gravityX = 0;
+  var gravityY = 0;
 
   weatherGet();
 
@@ -24,7 +26,7 @@ planck.testbed(function(testbed) {
 
   // var PLAYER_R = 0.35;
   // var BALL_R = 0.23;
-  var BALL_R = 0.30;
+  var BALL_R   = 0.30;
   var POCKET_R = 0.6;
   var CIRCLE_R = 1;
 
@@ -33,9 +35,9 @@ planck.testbed(function(testbed) {
 
   testbed.x = 0;
   testbed.y = 0;
-  testbed.width = width * 1.2;
+  testbed.width  = width * 1.2;
   testbed.height = height * 1.2;
-  testbed.ratio = 12;
+  testbed.ratio  = 12;
   testbed.mouseForce = -50;
   testbed.info('あごあご','ago');
 
@@ -43,7 +45,7 @@ planck.testbed(function(testbed) {
 
   var world = pl.World({
     // 重力の設定(x,y)
-    gravity : Vec2(0,0)
+    gravity : Vec2(gravityX,gravityY)
   });
 
   var walls = [
@@ -260,6 +262,31 @@ planck.testbed(function(testbed) {
         world.destroyBody(ball);
         console.log("おめでとう！あごがカップに突き刺さりました！！");
         $('#data_view').html("おめでとう！あごがカップに突き刺さりました！！");
+
+        var $form = $('#form_area');
+
+        swal({
+          title : "Hello,Ago!",
+          text  : "あなたのあごは"+count+"倍になりました！",
+          type  : "success",
+          content : "input",
+          showCancelButton  : true,
+          cancelButtonText  : "いやんご！",
+          confirmButtonText : "いいんご！",
+          closeOnConfirm    : false,
+          closeOnCancel     : false,
+          closeOnClickOutside : false
+        }).then((value) => {
+          swal({
+            title : value,
+            text  : "上記の名前で登録します！",
+            type  : "success"
+          }).then((isConfirm) => {
+            $('#user_name').val(value);
+            $('#user_score').val(count);
+            $form.submit();
+          });
+        });
       }
     }, 1);
   });
@@ -281,7 +308,7 @@ planck.testbed(function(testbed) {
       world.setGravity(Vec2(gravityX,gravityY));
       setTimeout(function(){
         world.setGravity(Vec2(0,0));
-      },(gravityX+gravityY)*3);
+      },(Math.abs(gravityX)+Math.abs(gravityY))*2);
     }
 
     // 障害物を動かす
@@ -348,8 +375,8 @@ planck.testbed(function(testbed) {
     var cityName = ['Tokyo,jp','London,gb','Wellington,nz','Moscow,ru','Berlin,de','Nagoya,jp','Osaka,jp','Beijing,cn','Santiago,cl'];
 
     const apiKey = '8032c7477be265800cfe8035f5c084f0';
-    const city = cityName[Math.floor(Math.random()*cityName.length)];
-    const url = 'http://api.openweathermap.org/data/2.5/forecast?q=' + city + ',jp&units=metric&APPID=' + apiKey;
+    const city   = cityName[Math.floor(Math.random()*cityName.length)];
+    const url    = 'http://api.openweathermap.org/data/2.5/forecast?q=' + city + ',jp&units=metric&APPID=' + apiKey;
 
     $.ajax({
       url: url,
@@ -361,11 +388,11 @@ planck.testbed(function(testbed) {
       var windSpeedInfo = windSpeedDataSet(data.list[0].wind.speed);
       var windDegInfo   = windDegDataSet(data.list[0].wind.deg);
 
-      var gravity = gravityNumberSet(windDegInfo,windSpeedInfo);
-      gravityX = gravity.gravityX;
-      gravityY = gravity.gravityY;
+      var gravityObj = gravityNumberSet(windDegInfo,windSpeedInfo);
+      gravityX = gravityObj.gravityX;
+      gravityY = gravityObj.gravityY;
 
-      console.log(gravityX+"+"+gravityY);
+      console.log(gravityX+"と"+gravityY);
 
       console.log('成功');
       console.log("東京の天気は"+weatherInfo);
@@ -433,8 +460,8 @@ planck.testbed(function(testbed) {
       obj.gravityX = windSpeedInfo;
       obj.gravityY = -windSpeedInfo;
     }else if(windDegInfo === "南"){
-      obj.gravityX = -windSpeedInfo;
-      obj.gravityY = 0;
+      obj.gravityX = 0;
+      obj.gravityY = -windSpeedInfo;
     }else if(windDegInfo === "南西"){
       obj.gravityX = -windSpeedInfo;
       obj.gravityY = -windSpeedInfo;
