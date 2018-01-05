@@ -7,10 +7,12 @@ const $ = require("jquery");
 planck.testbed(function(testbed) {
   $('canvas').attr('id','stage');
 
-  weatherGet();
-
   var pl = planck, Vec2 = pl.Vec2, Math = pl.Math;
   var SPI4 = Math.sin(Math.PI / 4), SPI3 = Math.sin(Math.PI / 3);
+
+  var gravityX,gravityY;
+
+  weatherGet();
 
   var width = 6.00, height = 20.00;
 
@@ -271,8 +273,6 @@ planck.testbed(function(testbed) {
 
   testbed.step = function() {
     var v = ball.getLinearVelocity();
-    var gravityX = 50;
-    var gravityY = 50;
 
     // windDataSet(gravityX,gravityY);
 
@@ -345,8 +345,10 @@ planck.testbed(function(testbed) {
 
   // OpwnWeatherMapの利用
   function weatherGet(){
-    const apiKey = '8032c7477be265800cfe8035f5c084f0'
-    const city = 'Tokyo';
+    var cityName = ['Tokyo,jp','London,gb','Wellington,nz','Moscow,ru','Berlin,de','Nagoya,jp','Osaka,jp','Beijing,cn','Santiago,cl'];
+
+    const apiKey = '8032c7477be265800cfe8035f5c084f0';
+    const city = cityName[Math.floor(Math.random()*cityName.length)];
     const url = 'http://api.openweathermap.org/data/2.5/forecast?q=' + city + ',jp&units=metric&APPID=' + apiKey;
 
     $.ajax({
@@ -358,6 +360,12 @@ planck.testbed(function(testbed) {
       var weatherInfo   = weatherEnToJp(data.list[0].weather[0].main);
       var windSpeedInfo = windSpeedDataSet(data.list[0].wind.speed);
       var windDegInfo   = windDegDataSet(data.list[0].wind.deg);
+
+      var gravity = gravityNumberSet(windDegInfo,windSpeedInfo);
+      gravityX = gravity.gravityX;
+      gravityY = gravity.gravityY;
+
+      console.log(gravityX+"+"+gravityY);
 
       console.log('成功');
       console.log("東京の天気は"+weatherInfo);
@@ -392,21 +400,53 @@ planck.testbed(function(testbed) {
   function windDegDataSet(windDeg){
     if(337.5 <= windDeg || windDeg < 22.5){
       return "北";
-    }else if(22.5 <= windDeg || windDeg < 67.5){
+    }else if(22.5 <= windDeg && windDeg < 67.5){
       return "北東";
-    }else if(67.5 <= windDeg || windDeg < 112.5){
+    }else if(67.5 <= windDeg && windDeg < 112.5){
       return "東";
-    }else if(112.5 <= windDeg || windDeg < 157.5){
+    }else if(112.5 <= windDeg && windDeg < 157.5){
       return "南東";
-    }else if(157.5 <= windDeg || windDeg < 202.5){
+    }else if(157.5 <= windDeg && windDeg < 202.5){
       return "南";
-    }else if(202.5 <= windDeg || windDeg < 247.5){
+    }else if(202.5 <= windDeg && windDeg < 247.5){
       return "南西";
-    }else if(247.5 <= windDeg || windDeg < 292.5){
+    }else if(247.5 <= windDeg && windDeg < 292.5){
       return "西";
-    }else if(292.5 <= windDeg || windDeg < 337.5){
+    }else if(292.5 <= windDeg && windDeg < 337.5){
       return "北西";
     }
+  }
+
+  function gravityNumberSet(windDegInfo,windSpeedInfo){
+    var obj = new Object();
+
+    if(windDegInfo === "北"){
+      obj.gravityX = 0;
+      obj.gravityY = windSpeedInfo;
+    }else if(windDegInfo === "北東"){
+      obj.gravityX = windSpeedInfo;
+      obj.gravityY = windSpeedInfo;
+    }else if(windDegInfo === "東"){
+      obj.gravityX = windSpeedInfo;
+      obj.gravityY = 0;
+    }else if(windDegInfo === "南東"){
+      obj.gravityX = windSpeedInfo;
+      obj.gravityY = -windSpeedInfo;
+    }else if(windDegInfo === "南"){
+      obj.gravityX = -windSpeedInfo;
+      obj.gravityY = 0;
+    }else if(windDegInfo === "南西"){
+      obj.gravityX = -windSpeedInfo;
+      obj.gravityY = -windSpeedInfo;
+    }else if(windDegInfo === "西"){
+      obj.gravityX = -windSpeedInfo;
+      obj.gravityY = 0;
+    }else if(windDegInfo === "北西"){
+      obj.gravityX = -windSpeedInfo;
+      obj.gravityY = windSpeedInfo;
+    }
+
+    return obj;
   }
 
   function scale(x, y) {
