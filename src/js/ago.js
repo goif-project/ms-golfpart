@@ -5,8 +5,8 @@ const swal = require("sweetalert");
 
 // const mysql = require('mysql');
 // const express = require('express');
-// var app = express();
-//
+// var router = express.Router();
+
 // var connection = mysql.createConnection({
 //   host: '127.0.0.1',
 //   user: 'root',
@@ -306,11 +306,7 @@ planck.testbed(function(testbed) {
             type  : "success",
             closeOnClickOutside: false
           }).then((isConfirm) => {
-            /******************************/
-            /******************************/
-            console.log("ここでPOST/DB登録");
-            /******************************/
-            /******************************/
+
           });
         });
       }

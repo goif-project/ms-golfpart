@@ -42,12 +42,14 @@ module.exports = {
     ],
   },
 
-  node: {
-    console: true,
-    fs: 'empty',
-    net: 'empty',
-    tls: 'empty'
-  },
+  // node: {
+  //   console: true,
+  //   fs: 'empty',
+  //   net: 'empty',
+  //   tls: 'empty',
+  // },
+
+  //target: 'node',
 
   plugins: [
     new htmlWebpackPlugin({
