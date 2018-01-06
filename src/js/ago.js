@@ -3,6 +3,18 @@
 const $    = require("jquery");
 const swal = require("sweetalert");
 
+// const mysql = require('mysql');
+// const express = require('express');
+// var app = express();
+//
+// var connection = mysql.createConnection({
+//   host: '127.0.0.1',
+//   user: 'root',
+//   // password: 'jack50611',
+//   password: 'root',
+//   database: 'golf_db'
+// });
+
 /////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////
 planck.testbed(function(testbed) {
@@ -294,9 +306,11 @@ planck.testbed(function(testbed) {
             type  : "success",
             closeOnClickOutside: false
           }).then((isConfirm) => {
-            $('#user_name').val(value);
-            $('#user_score').val(score);
-            $form.submit();
+            /******************************/
+            /******************************/
+            console.log("ここでPOST/DB登録");
+            /******************************/
+            /******************************/
           });
         });
       }

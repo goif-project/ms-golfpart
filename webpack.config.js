@@ -42,6 +42,13 @@ module.exports = {
     ],
   },
 
+  node: {
+    console: true,
+    fs: 'empty',
+    net: 'empty',
+    tls: 'empty'
+  },
+
   plugins: [
     new htmlWebpackPlugin({
       title:    'page1',
