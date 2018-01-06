@@ -295,7 +295,7 @@ planck.testbed(function(testbed) {
         }
 
         swal({
-          title : "Hello,Ago!",
+          title : "クリアおめでとう！",
           text  : "あなたのスコアは"+score+"です！",
           type  : "success",
           content : "input"
@@ -306,19 +306,14 @@ planck.testbed(function(testbed) {
             type  : "success",
             closeOnClickOutside: false
           }).then((isConfirm) => {
-
+            $('user_name').val(value);
+            $('user_score').val(score);
+            $('#form_area').submit()
           });
         });
       }
     }, 1);
   });
-
-  // world.on('fixture-removed', function(contact) {
-  //   setTimeout(function() {
-  //     console.log("おめでとう！あごが伸びました！");
-  //   }, 1);
-  //   console.log("あごおおおお");
-  // });
 
   testbed.step = function() {
     var v = ball.getLinearVelocity();
