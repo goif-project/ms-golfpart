@@ -45,8 +45,8 @@ module.exports = {
   plugins: [
     new htmlWebpackPlugin({
       title:    'page1',
-      filename: 'page1.html',
-      template: './pug/page1.pug'
+      filename: 'index.html',
+      template: './pug/index.pug'
     }),
     new htmlWebpackPlugin({
       title:    'page2',
