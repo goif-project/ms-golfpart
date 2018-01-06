@@ -14,8 +14,6 @@ planck.testbed(function(testbed) {
   var gravityX = 0;
   var gravityY = 0;
 
-  weatherGet();
-
   var width = 6.00, height = 20.00;
 
   // 障害物の速度
@@ -27,7 +25,7 @@ planck.testbed(function(testbed) {
   // var PLAYER_R = 0.35;
   // var BALL_R = 0.23;
   var BALL_R   = 0.50;
-  var POCKET_R = 0.6;
+  var POCKET_R = 0.5;
   var CIRCLE_R = 1;
 
   var count = 0;
@@ -35,13 +33,17 @@ planck.testbed(function(testbed) {
 
   testbed.x = 0;
   testbed.y = 0;
-  testbed.width  = width * 1.2;
-  testbed.height = height * 1.2;
+  testbed.width  = width * 1.3;
+  testbed.height = height * 1.3;
   testbed.ratio  = 12;
   testbed.mouseForce = -100;
-  testbed.info('あごあご','ago');
 
   pl.internal.Settings.velocityThreshold = 0;
+
+  var skill;
+
+  skill = skillDataSet(urlParamGet());
+  weatherGet();
 
   var world = pl.World({
     // 重力の設定(x,y)
@@ -264,10 +266,16 @@ planck.testbed(function(testbed) {
         $('#data_view').html("おめでとう！あごがカップに突き刺さりました！！");
 
         var $form = $('#form_area');
+        if(skill == 2){
+          count < 11 ? count = 0 : count;
+          var score = 4500 -count*100;
+        }else{
+          var score = 5000 - count*100;
+        }
 
         swal({
           title : "Hello,Ago!",
-          text  : "あなたのあごは"+count+"倍になりました！",
+          text  : "あなたのスコアは"+score+"です！",
           type  : "success",
           content : "input"
         }).then((value) => {
@@ -278,7 +286,7 @@ planck.testbed(function(testbed) {
             closeOnClickOutside: false
           }).then((isConfirm) => {
             $('#user_name').val(value);
-            $('#user_score').val(count);
+            $('#user_score').val(score);
             $form.submit();
           });
         });
@@ -379,7 +387,7 @@ planck.testbed(function(testbed) {
       type: 'GET',
     })
     .done(function(data){
-      var weatherInfo   = weatherEnToJp(data.list[0].weather[0].main);
+      var weatherInfo   = weatherEnToJp(data.list[0].weather[0].main,skill);
       var windSpeedInfo = windSpeedDataSet(data.list[0].wind.speed);
       var windDegInfo   = windDegDataSet(data.list[0].wind.deg);
 
@@ -397,24 +405,28 @@ planck.testbed(function(testbed) {
       $('#weather_data').html(city+"の天気は"+weatherInfo+"です<br>風の強さは"+windSpeedInfo+"/風向きは"+windDegInfo);
     })
     .fail(function(data){
-      console.log('成功');
+      console.log('再読み込みしてください');
     });
   }
 
   // 天気(clear,clouds,rain,snow)を英語から日本語へ変換
-  function weatherEnToJp(weather){
+  function weatherEnToJp(weather,skill){
     console.log(weather);
 
-    if(weather === "Clear"){
+    if(skill === 4){
       return "晴れ";
-    }else if(weather === "Clouds"){
-      return "曇り";
-    }else if(weather === "Rain"){
-      return "雨";
-    }else if(weather === "Snow"){
-      return "雪";
     }else{
-      return "雨";
+      if(weather === "Clear"){
+        return "晴れ";
+      }else if(weather === "Clouds"){
+        return "曇り";
+      }else if(weather === "Rain"){
+        return "雨";
+      }else if(weather === "Snow"){
+        return "雪";
+      }else{
+        return "雨";
+      }
     }
   }
 
@@ -499,6 +511,26 @@ planck.testbed(function(testbed) {
 
     // 都市名をセット
     $stageName.find('#city').html(city);
+  }
+
+  function urlParamGet(){
+    var arg = new Object;
+    var url = location.search.substring(1).split('&');
+
+    for(var i=0; url[i]; i++){
+      var k = url[i].split('=');
+      arg[k[0]] = k[1];
+    }
+
+     return arg.counter_num;
+  }
+
+  function skillDataSet(skillNumber){
+    skillNumber == 1 ? (testbed.mouseForce = -150,skill = 1) : false;
+    skillNumber == 2 ? skill = 2 : false;
+    skillNumber == 3 ? (POCKET_R = 0.75,skill = 3) : false;
+    skillNumber == 4 ? skill = 4 : false;
+    return skill;
   }
 
   function scale(x, y) {
