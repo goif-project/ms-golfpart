@@ -3,6 +3,9 @@
 @import "include/_mixin.styl"
 @import "include/_keyframes.styl"
 
+html,body
+  height 100%
+
 .txC
   text-align center
 
@@ -69,28 +72,46 @@
       width 100%
       padding 2% 0 0
       box-sizing border-box
-      text-align center
-      position relative
       > div
-        // display table
-        width 450px
+        width 900px
         height 450px
         margin 0 auto
-        font-size 10vw
-        // background #ff0
-        hidden_test()
+        padding 3% 0 0 50%
+        box-sizing border-box
         &.char1
-          background-image url(../img/1.png)
-          background-size 100% auto
+          background url(../img/1.png) no-repeat
+          background-size 50% auto
         &.char2
-          background-image url(../img/2.png)
-          background-size 100% auto
+          background url(../img/2.png) no-repeat
+          background-size 50% auto
         &.char3
-          background-image url(../img/3.png)
-          background-size 100% auto
+          background url(../img/3.png) no-repeat
+          background-size 50% auto
         &.char4
-          background-image url(../img/4.png)
-          background-size 100% auto
+          background url(../img/4.png) no-repeat
+          background-size 50% auto
+        .skill_title
+          font-size 3vw
+        .skill_text
+          font-size 2vw
+        .skill_effect
+          font-size 2.5vw
+        .item
+          display block
+          width 200px
+          height 50px
+          margin 7% 0 5%
+          font-size 3vw
+          color #ffa000
+          font-weight bold
+          text-align center
+          line-height 50px
+          border 2px solid #ffa000
+          border-radius 10px
+          background #fff
+        .skill
+          display block
+          padding 0 0 0 5%
   .btn_wrap
     display block
     width 500px
