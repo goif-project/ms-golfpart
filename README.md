@@ -14,3 +14,8 @@
 4. page4.html(name.html)で名前入力(hiddenとかでスコア保存？？) ← 未作成
 5. 名前・スコアをデータベースに登録 ← node-expressにて作成中。。。
 6. score.htmlで結果・ランキング表示 ← node-expressにて作成中。。。
+
+## 0107追加
+`npm start`のwebで見るとindexの画像が表示されない
+→移行するmonacaには画像があるので、大丈夫！！
+[monaca追加済みgithub](https://github.com/goif-project/monaca-golf-play)

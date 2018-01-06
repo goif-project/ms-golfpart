@@ -14,9 +14,50 @@ class Button extends React.Component{
 
 class Result extends React.Component{
   render(){
+    var skill_text = null,skill_title = null,skill_effect = null
+    if (this.props.localCounter == 1) {
+      skill_title = "パワーショット"
+      skill_text = "ボールを打つ強さを1.5倍に強化！"
+      skill_effect = "打つ強さ1.5倍"
+    }else if (this.props.localCounter == 2) {
+      skill_title = "ノーリフレクション"
+      skill_text = "壁に反射した回数を10回分減少させる"
+      skill_effect = "壁の反射回数 -10回"
+    }else if (this.props.localCounter == 3) {
+      skill_title = "デカカップ"
+      skill_text = "カップの大きさを1.5倍に大きくする！"
+      skill_effect = "カップの大きさ1.5倍"
+    }else if (this.props.localCounter == 4) {
+      skill_title = "晴れ男"
+      skill_text = "いかなる天候も晴れにしてしまう！"
+      skill_effect = "天気が晴れ"
+    }
     return(
       <div className={"char"+this.props.localCounter}>
-        {this.props.localCounter}
+        <div className="skill_title">
+          <span className="item">
+            スキル名
+          </span>
+          <span className="skill">
+            {skill_title}
+          </span>
+        </div>
+        <div className="skill_text">
+          <span className="item">
+            説明
+          </span>
+          <span className="skill">
+            {skill_text}
+          </span>
+        </div>
+        <div className="skill_effect">
+          <span className="item">
+            効果
+          </span>
+          <span className="skill">
+            {skill_effect}
+          </span>
+        </div>
       </div>
     )
   }
