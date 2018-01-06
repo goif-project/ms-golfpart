@@ -26,7 +26,7 @@ planck.testbed(function(testbed) {
 
   // var PLAYER_R = 0.35;
   // var BALL_R = 0.23;
-  var BALL_R   = 0.30;
+  var BALL_R   = 0.50;
   var POCKET_R = 0.6;
   var CIRCLE_R = 1;
 
@@ -38,7 +38,7 @@ planck.testbed(function(testbed) {
   testbed.width  = width * 1.2;
   testbed.height = height * 1.2;
   testbed.ratio  = 12;
-  testbed.mouseForce = -50;
+  testbed.mouseForce = -100;
   testbed.info('あごあご','ago');
 
   pl.internal.Settings.velocityThreshold = 0;
