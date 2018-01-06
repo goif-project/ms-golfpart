@@ -269,18 +269,13 @@ planck.testbed(function(testbed) {
           title : "Hello,Ago!",
           text  : "あなたのあごは"+count+"倍になりました！",
           type  : "success",
-          content : "input",
-          showCancelButton  : true,
-          cancelButtonText  : "いやんご！",
-          confirmButtonText : "いいんご！",
-          closeOnConfirm    : false,
-          closeOnCancel     : false,
-          closeOnClickOutside : false
+          content : "input"
         }).then((value) => {
           swal({
             title : value,
             text  : "上記の名前で登録します！",
-            type  : "success"
+            type  : "success",
+            closeOnClickOutside: false
           }).then((isConfirm) => {
             $('#user_name').val(value);
             $('#user_score').val(count);
@@ -406,6 +401,8 @@ planck.testbed(function(testbed) {
 
   // 天気(clear,clouds,rain,snow)を英語から日本語へ変換
   function weatherEnToJp(weather){
+    console.log(weather);
+
     if(weather === "Clear"){
       return "晴れ";
     }else if(weather === "Clouds"){
