@@ -29,7 +29,10 @@ planck.testbed(function(testbed) {
   var CIRCLE_R = 1;
 
   var count = 0;
-  var pastVx,pastVy;
+  var score = 5000;
+  $('#score').html("あなたの現在のスコアは<span>"+score+"</span>です！");
+
+//  var pastVx,pastVy;
 
   testbed.x = 0;
   testbed.y = 0;
@@ -240,6 +243,14 @@ planck.testbed(function(testbed) {
     console.log("現在の壁への衝突回数は"+count+"回です");
     $('#data_view').html("現在の壁への衝突回数は"+count+"回です");
 
+    if(skill == 2){
+      var score = 4500 -count*100;
+    }else{
+      var score = 5000 - count*100;
+    }
+
+    $('#score').html("あなたの現在のスコアは<span>"+score+"<span>です！");
+
     var fA = contact.getFixtureA(), bA = fA.getBody();
     var fB = contact.getFixtureB(), bB = fB.getBody();
 
@@ -262,15 +273,13 @@ planck.testbed(function(testbed) {
     setTimeout(function() {
       if (ball && pocket) {
         world.destroyBody(ball);
-        console.log("おめでとう！あごがカップに突き刺さりました！！");
-        $('#data_view').html("おめでとう！あごがカップに突き刺さりました！！");
 
         var $form = $('#form_area');
         if(skill == 2){
           count < 11 ? count = 0 : count;
-          var score = 4500 -count*100;
+          score = 4500 -count*100;
         }else{
-          var score = 5000 - count*100;
+          score = 5000 - count*100;
         }
 
         swal({
@@ -530,6 +539,7 @@ planck.testbed(function(testbed) {
     skillNumber == 2 ? skill = 2 : false;
     skillNumber == 3 ? (POCKET_R = 0.75,skill = 3) : false;
     skillNumber == 4 ? skill = 4 : false;
+    $('#skill').addClass('skill_'+skill);
     return skill;
   }
 
