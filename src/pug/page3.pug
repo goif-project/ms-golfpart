@@ -6,7 +6,12 @@ html(lang="ja")
     script(src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/4.5.1/pixi.min.js")
     script(src="https://cdn.jsdelivr.net/planck/0.1/planck-with-testbed.js")
   body.index
-    #post
+    .stage_name#stage_name
+      span.weather
+        .icon#weather_icon
+      h2.city#city
+      span.wind
+        .icon#wind_icon
     #page1.none
     #page2.none
     .container

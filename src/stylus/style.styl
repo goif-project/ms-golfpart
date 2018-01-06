@@ -113,10 +113,85 @@
 
 //page3
 .index
-  .container
-    width 100%
-    height auto
-    margin 50px auto 0 auto
-  #stage
-    width 100%
-    background-color #009365 !important
+    height 100vh
+    padding 30px 0 0 0
+    box-sizing  border-box
+    background-color #009365
+    .stage_name
+        width 650px
+        height 100px
+        margin 0 auto
+        padding 10px 30px
+        box-sizing border-box
+        border-radius 50px
+        background-color #f8f8f8
+        &::after
+            display block
+            clear both
+            content ''
+        > *
+            display block
+            float left
+        .weather
+            width 80px
+            height 80px
+            padding 15px
+            box-sizing border-box
+            border-radius 50%
+            background-color #f57979
+            .icon
+                width 50px
+                height 50px
+                background-size contain
+            .clear
+                background-image url('../img/icon_clear.png')
+            .cloud
+                background-image url('../img/icon_cloud.png')
+            .rain
+                background-image url('../img/icon_rain.png')
+            .snow
+                background-image url('../img/icon_snow.png')
+        .wind
+            width 80px
+            height 80px
+            padding 15px
+            box-sizing border-box
+            border-radius 50%
+            background-color #009365
+            .icon
+                width 50px
+                height 50px
+                background-image url('../img/icon_wind.png')
+                background-size contain
+            .wind_n
+                transform rotate(0deg)
+            .wind_ne
+                transform rotate(45deg)
+            .wind_e
+                transform rotate(90deg)
+            .wind_se
+                transform rotate(135deg)
+            .wind_s
+                transform rotate(180deg)
+            .wind_sw
+                transform rotate(225deg)
+            .wind_w
+                transform rotate(270deg)
+            .wind_nw
+                transform rotate(315deg)
+        .city
+            width 430px
+            height 80px
+            line-height 80px
+            text-align center
+            font-size 45px
+            color #444
+
+
+    .container
+        width 100%
+        height auto
+        margin 0 auto
+    #stage
+        width 100%
+        background-color #009365 !important

@@ -387,6 +387,8 @@ planck.testbed(function(testbed) {
       gravityX = gravityObj.gravityX;
       gravityY = gravityObj.gravityY;
 
+      stageTitleSet(city,weatherInfo,windDegInfo,windSpeedInfo);
+
       console.log(gravityX+"と"+gravityY);
 
       console.log('成功');
@@ -471,6 +473,32 @@ planck.testbed(function(testbed) {
     }
 
     return obj;
+  }
+
+  function stageTitleSet(city,weather,windDeg,windSize){
+    var $stageName = $('#stage_name');
+    var weatherEn,windDegTag;
+
+    // 天候アイコンをセット
+    weather === "晴れ" ? weatherEn = "clear" : weatherEn;
+    weather === "曇り" ? weatherEn = "cloud" : weatherEn;
+    weather === "雨" ? weatherEn = "rain" : weatherEn;
+    weather === "雪" ? weatherEn = "snow" : weatherEn;
+    $stageName.find('#weather_icon').addClass(weatherEn);
+
+    // 風向きアイコンをセット
+    windDeg === "北" ? windDegTag = "wind_n" : windDegTag;
+    windDeg === "北東" ? windDegTag = "wind_ne" : windDegTag;
+    windDeg === "東" ? windDegTag = "wind_e" : windDegTag;
+    windDeg === "南東" ? windDegTag = "wind_se" : windDegTag;
+    windDeg === "南" ? windDegTag = "wind_s" : windDegTag;
+    windDeg === "南西" ? windDegTag = "wind_sw" : windDegTag;
+    windDeg === "西" ? windDegTag = "wind_e" : windDegTag;
+    windDeg === "北西" ? windDegTag = "wind_nw" : windDegTag;
+    $stageName.find('#wind_icon').addClass(windDegTag);
+
+    // 都市名をセット
+    $stageName.find('#city').html(city);
   }
 
   function scale(x, y) {
