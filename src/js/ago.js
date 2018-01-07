@@ -295,10 +295,11 @@ planck.testbed(function(testbed) {
         }
 
         swal({
-          title : "クリアおめでとう！",
-          text  : "あなたのスコアは"+score+"です！",
+          title : "あなたのスコアは"+score+"です！",
+          text  : "登録したいユーザー名を入力してください",
           type  : "success",
-          content : "input"
+          content : "input",
+          closeOnClickOutside: false
         }).then((value) => {
           swal({
             title : value,
