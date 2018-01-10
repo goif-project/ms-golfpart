@@ -95,7 +95,7 @@ class Main extends React.Component{
           <Result localCounter={this.state.counter} />
         </div>
         <div className="btn_wrap">
-            <div className="btn_inline_wrap">
+            <div className={"btn_inline_wrap btn"+this.state.counter}>
                 <Button localHandleClick={this.handleClick} increment={1} />
                 <Button localHandleClick={this.handleClick} increment={2} />
                 <Button localHandleClick={this.handleClick} increment={3} />
