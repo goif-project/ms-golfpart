@@ -17,7 +17,10 @@ html,body
     height 100%
     position relative
     &.page-1,&.page-2
-        background-color-animetion #14ff00, #f2ff86
+        background-color #009365
+    > div
+        width 100%
+        height 100%
     //page1
     .h1_wrap
         font-size 11vw
@@ -51,87 +54,135 @@ html,body
     .user_wrap
         font-size 3vw
         padding 4% 0 0
-    .connect
-        display block
-        width 40%
-        margin 10% auto 0
-        padding 3%
-        font-size 6vw
-        position relative
-        font-weight bold
-        text-decoration none
-        color #ffa000
-        background #fff1da
-        border-bottom solid 10px #ffa000
-        border-radius 15px 15px 0 0
-        &.page2
-            margin 0 auto
+
+
     //page2
     .char_set
-        .result_wrap
+        position relative
+        height 100%
+        .page_tag_area
             width 100%
-            padding 2% 0 0
+            height 100px
+            padding 30px 0 0 0
             box-sizing border-box
+            .tag_main
+                width 100%
+                height 100%
+                background-color #eb974e
+                > h2
+                    width 900px
+                    height 100%
+                    margin 0 auto
+                    padding 0 0 0 112px
+                    line-height 70px
+                    font-size 36px
+                    font-weight bold
+                    color #f5f5f5
+        .result_wrap
             > div
                 width 900px
-                height 450px
+                height 410px
                 margin 0 auto
-                padding 3% 0 0 50%
                 box-sizing border-box
-                &.char1
-                    background url(../img/1.png) no-repeat
-                    background-size 50% auto
-                &.char2
-                    background url(../img/2.png) no-repeat
-                    background-size 50% auto
-                &.char3
-                    background url(../img/3.png) no-repeat
-                    background-size 50% auto
-                &.char4
-                    background url(../img/4.png) no-repeat
-                    background-size 50% auto
-                .skill_title
-                    font-size 3vw
-                .skill_text
-                    font-size 2vw
-                .skill_effect
-                    font-size 2.5vw
-                .item
+                &::after
+                    content ''
+                    clear both
                     display block
-                    width 200px
-                    height 50px
-                    margin 7% 0 5%
-                    font-size 3vw
-                    color #ffa000
-                    font-weight bold
-                    text-align center
-                    line-height 50px
-                    border 2px solid #ffa000
-                    border-radius 10px
-                    background #fff
-                .skill
-                    display block
-                    padding 0 0 0 5%
+                .left,.right
+                    width 50%
+                    height 100%
+                    padding 30px 50px
+                    box-sizing border-box
+                    float left
+                .left
+                    .skill_image01,.skill_image02,.skill_image03,.skill_image04
+                        width 100%
+                        height 100%
+                        border 10px solid #f5f5f5
+                        box-sizing border-box
+                        border-radius 70px
+                        background-size contain
+                    .skill_image01
+                        background-image url('../img/1.png')
+                    .skill_image02
+                        background-image url('../img/2.png')
+                    .skill_image03
+                        background-image url('../img/3.png')
+                    .skill_image04
+                        background-image url('../img/4.png')
+                .right
+                    .item
+                        display block
+                        width 200px
+                        height 50px
+                        margin 7% 0 5%
+                        font-size 20px
+                        color #ffa000
+                        font-weight bold
+                        text-align center
+                        line-height 50px
+                        border 2px solid #ffa000
+                        border-radius 10px
+                        background #fff
+                    .skill
+                        display block
+                        padding 0 0 0 20px
+                        font-size 18px
+                        font-weight bold
+                        color #f5f5f5
 
-    .btn_wrap
-        display block
-        width 500px
-        margin 0 auto
-        button
-            button_delete()
-            display inline-block
-            width 50px
-            height 50px
-            border-radius 50%
-            border 2px solid #000
-            margin 30px 100px 50px 0
-            cursor pointer
-            font-size 3vw
-            color #000
-            background #fff
+        .btn_wrap
+            display block
+            width 100%
+            margin 0 auto
+            padding 20px 0
             box-sizing border-box
-            &:last-child
-                margin 0
+            background-color #55ac91
+            .btn_inline_wrap
+                width 400px
+                height 100%
+                margin 0 auto
+                button
+                    button_delete()
+                    display inline-block
+                    width 70px
+                    height 70px
+                    margin 0 0 0 40px
+                    cursor pointer
+                    color #000
+                    box-sizing border-box
+                    &:first-child
+                        margin 0
+                    .button_image01,.button_image02,.button_image03,.button_image04
+                        width 100%
+                        height 100%
+                        box-sizing border-box
+                        border-radius 15px
+                        background-size contain
+                    .forcus
+                        border 5px solid #f5f5f5
+                    for i in 1..4
+                        .button_image0{i}
+                            background-image url('../img/'+i+'.png')
+
+        .form_area
+            position absolute
+            right 0
+            bottom 30px
+            left 0
+            margin auto
+            text-align center
+            .connect
+                width 300px
+                height 80px
+                border-bottom solid 10px #ffa000
+                border-radius 10px 10px 0 0
+                font-size 28px
+                font-weight bold
+                text-decoration none
+                letter-spacing 4px
+                color #ffa000
+                background #fff1da
 
 //page3
 .index
