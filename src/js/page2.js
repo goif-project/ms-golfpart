@@ -33,7 +33,7 @@ class Result extends React.Component{
     }else if (this.props.localCounter == 4) {
       skill_title = "晴れ男"
       skill_text = "いかなる天候も晴れにしてしまう！"
-      skill_effect = "天気が晴れ"
+      skill_effect = "天候を晴れに固定"
     }
     return(
 <div className="char">
