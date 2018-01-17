@@ -24,17 +24,45 @@ html,body
     /////////////////////////////////////////////////////////
     //page1
     &.page-1
+        background-image url('../img/index_back.png')
+        background-size auto 100%
+        background-position center
+        background-repeat no-repeat
         .title
             position absolute
             top 0
             right 0
             bottom 0
             left 0
-            height 100px
             margin auto
             text-align center
-            font-size 100px
-            color #f5f5f5
+            background-image url('../img/index_title.png')
+            background-size 80% auto
+            background-repeat no-repeat
+            background-position 50% 70px
+        .henko
+            position relative
+            width 100%
+            height 100%
+            > a
+                position absolute
+                top 600px
+                right 0
+                left 0
+                display block
+                width 300px
+                height 90px
+                margin auto
+                border 5px solid #f5f5f5
+                box-sizing border-box
+                line-height 80px
+                border-radius 20px
+                font-size 40px
+                font-weight bold
+                letter-spacing 4px
+                color #f5f5f5
+                background-color #F2784B
+
 
     /////////////////////////////////////////////////////////
     //page2
@@ -250,9 +278,12 @@ html,body
         border 5px solid #f5f5f5
         box-sizing border-box
         border-radius 10px
+        // background-image url('../img/icon_rain.png')
+        // background-size contain
     #stage
         width 100%
         background-color #009365 !important
+        // background-color transparent !important
 
     .score
         position absolute

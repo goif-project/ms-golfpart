@@ -252,6 +252,14 @@ planck.testbed(function(testbed) {
 
   world.on('post-solve', function(contact) {
     count++;
+
+    // 初回以外だったら音声ファイルを巻き戻す
+	if( typeof( document.getElementById('audio').currentTime ) != 'undefined' )
+	{
+		document.getElementById('audio').currentTime = 0;
+	}
+    $('#audio').get(0).play();
+
     console.log("現在の壁への衝突回数は"+count+"回です");
     $('#data_view').html("現在の壁への衝突回数は"+count+"回です");
 
