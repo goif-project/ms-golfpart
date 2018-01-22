@@ -310,9 +310,30 @@ planck.testbed(function(testbed) {
             type  : "success",
             closeOnClickOutside: false
           }).then((isConfirm) => {
-            $('user_name').val(value);
-            $('user_score').val(score);
-            $('#form_area').submit()
+            // $('user_name').val(value);
+            // $('user_score').val(score);
+            // $('#form_area').submit()
+            var param = {userName: value,userScore: score};
+
+            $.ajax({
+            type: "POST",
+            url: "http://mayomayooo.sakura.ne.jp/golf_db/insert_score.php",
+            dataType : "json",
+            data: param,
+            cache: "false"
+            }).done(function(){
+              //  保存成功をアラート表示
+              console.log("データの保存に成功しました");
+
+              window.location.href = "/";
+
+            }).fail(function(XMLHttpRequest, textStatus, errorThrown){
+              console.log("失敗！");
+              console.log(XMLHttpRequest);
+              console.log(textStatus);
+              console.log(errorThrown);
+            });
+
           });
         });
       }
