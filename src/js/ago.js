@@ -3,18 +3,6 @@
 const $    = require("jquery");
 const swal = require("sweetalert");
 
-// const mysql = require('mysql');
-// const express = require('express');
-// var router = express.Router();
-
-// var connection = mysql.createConnection({
-//   host: '127.0.0.1',
-//   user: 'root',
-//   // password: 'jack50611',
-//   password: 'root',
-//   database: 'golf_db'
-// });
-
 /////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////
 planck.testbed(function(testbed) {
