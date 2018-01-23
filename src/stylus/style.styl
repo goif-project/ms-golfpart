@@ -212,75 +212,97 @@ html,body
     padding 30px 0 0 0
     box-sizing  border-box
     background-color #009365
-    .stage_name
-        width 650px
-        height 100px
+    .stage_info
+        width 90%
         margin 0 auto
-        padding 10px 30px
-        box-sizing border-box
-        border-radius 50px
-        background-color #f8f8f8
         &::after
-            display block
-            clear both
             content ''
-        > *
+            clear both
             display block
+        .timer
             float left
-        .weather
-            width 80px
-            height 80px
-            padding 15px
+            width calc((100% - 650px) / 2)
+            height 100px
+            .timer__main
+                width 100px
+                height 100px
+                line-height 100px
+                text-align center
+                border-radius 50%
+                font-size 36px
+                font-weight bold
+                color #009365
+                background-color #f8f8f8
+        .stage_name
+            float left
+            width 650px
+            height 100px
+            margin 0 auto
+            padding 10px 30px
             box-sizing border-box
-            border-radius 50%
-            background-color #f57979
-            .icon
-                width 50px
-                height 50px
-                background-size contain
-            .clear
-                background-image url('../img/icon_clear.png')
-            .cloud
-                background-image url('../img/icon_cloud.png')
-            .rain
-                background-image url('../img/icon_rain.png')
-            .snow
-                background-image url('../img/icon_snow.png')
-        .wind
-            width 80px
-            height 80px
-            padding 15px
-            box-sizing border-box
-            border-radius 50%
-            background-color #009365
-            .icon
-                width 50px
-                height 50px
-                background-image url('../img/icon_wind.png')
-                background-size contain
-            .wind_n
-                transform rotate(0deg)
-            .wind_ne
-                transform rotate(45deg)
-            .wind_e
-                transform rotate(90deg)
-            .wind_se
-                transform rotate(135deg)
-            .wind_s
-                transform rotate(180deg)
-            .wind_sw
-                transform rotate(225deg)
-            .wind_w
-                transform rotate(270deg)
-            .wind_nw
-                transform rotate(315deg)
-        .city
-            width 430px
-            height 80px
-            line-height 80px
-            text-align center
-            font-size 45px
-            color #444
+            border-radius 50px
+            background-color #f8f8f8
+            &::after
+                display block
+                clear both
+                content ''
+            > *
+                display block
+                float left
+            .weather
+                width 80px
+                height 80px
+                padding 15px
+                box-sizing border-box
+                border-radius 50%
+                background-color #f57979
+                .icon
+                    width 50px
+                    height 50px
+                    background-size contain
+                .clear
+                    background-image url('../img/icon_clear.png')
+                .cloud
+                    background-image url('../img/icon_cloud.png')
+                .rain
+                    background-image url('../img/icon_rain.png')
+                .snow
+                    background-image url('../img/icon_snow.png')
+            .wind
+                width 80px
+                height 80px
+                padding 15px
+                box-sizing border-box
+                border-radius 50%
+                background-color #009365
+                .icon
+                    width 50px
+                    height 50px
+                    background-image url('../img/icon_wind.png')
+                    background-size contain
+                .wind_n
+                    transform rotate(0deg)
+                .wind_ne
+                    transform rotate(45deg)
+                .wind_e
+                    transform rotate(90deg)
+                .wind_se
+                    transform rotate(135deg)
+                .wind_s
+                    transform rotate(180deg)
+                .wind_sw
+                    transform rotate(225deg)
+                .wind_w
+                    transform rotate(270deg)
+                .wind_nw
+                    transform rotate(315deg)
+            .city
+                width 430px
+                height 80px
+                line-height 80px
+                text-align center
+                font-size 45px
+                color #444
 
 
     .container
@@ -332,3 +354,71 @@ html,body
         background-image url('../img/3.png')
     .skill_4
         background-image url('../img/4.png')
+
+    // 開始時のオーバレイ
+    .overlay
+        position absolute
+        top 0
+        right 0
+        bottom 0
+        left 0
+        width 100%
+        height 100%
+        background-color rgba(#000,0.5)
+        &__main
+            position absolute
+            z-index 1000
+            top 0
+            right 0
+            bottom 0
+            left 0
+            width 800px
+            height 400px
+            margin auto
+            padding 0 30px
+            box-sizing border-box
+            border-radius 50px
+            background-color #00B16A
+            .title
+                height 100px
+                line-height 100px
+                text-align center
+                font-size 40px
+                font-weight bold
+                color #f5f5f5
+            .description
+                height 300px
+                &::after
+                    content ''
+                    clear both
+                    display block
+                &__text,&__img
+                    float left
+                &__text
+                    width 300px
+                    height 100%
+                &__img
+                    width calc(800px - 360px)
+                    height 100%
+                    background-image url('../img/desc_img01.png')
+                    background-size contain
+                    background-repeat no-repeat
+        .overlay_delete
+            border none
+            cursor pointer
+            outline none
+            padding 0
+            // 自作スタイル
+            position absolute
+            top 420px
+            right 0
+            bottom 0
+            left 0
+            width 220px
+            height 70px
+            margin 0 auto
+            border-radius 10px
+            font-size 30px
+            font-weight bold
+            color #f5f5f5
+            background-color #F2784B

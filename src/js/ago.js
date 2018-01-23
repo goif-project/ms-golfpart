@@ -41,8 +41,13 @@ planck.testbed(function(testbed) {
   var CIRCLE_R = 1;
 
   var count = 0;
-  var score = 5000;
+  var score = 15000;
   $('#score').html("あなたの現在のスコアは<span>"+score+"</span>です！");
+
+  // タイマー用
+  var timerID;
+  var remainTimer = 100;
+  var pauseTimer;
 
 //  var pastVx,pastVy;
 
@@ -59,6 +64,9 @@ planck.testbed(function(testbed) {
 
   skill = skillDataSet(urlParamGet());
   weatherGet();
+
+  // タイマー開始
+  timerStart();
 
   var world = pl.World({
     // 重力の設定(x,y)
@@ -223,12 +231,6 @@ planck.testbed(function(testbed) {
   //   player.render = {fill : '#ff411a', stroke: 'black'};
   // });
 
-  // ここに打数管理のプログラムを記述する
-  // ボールをクリックしている場合のみ動作するよう変更
-  $('#stage').on('click', function(){
-    console.log("aaa");
-  });
-
 
   var mouse = {
     startX: 0,
@@ -238,17 +240,11 @@ planck.testbed(function(testbed) {
     color: "black",
     isDrawing: false
   };
-  $('#stage')
 
-  addEventListener("mousemove", function(e){
-    //2.マウスが動いたら座標値を取得
-  	var rect = e.target.getBoundingClientRect();
-  	mouse.x = e.clientX - rect.left;
-  	mouse.y = e.clientY - rect.top;
-    console.log(mouse.x);
-    console.log(mouse.y);
-    console.log(ball.getPosition());
-  });
+  // $('#overlay_delete').on('click', function(){
+  //   $('.overlay').hide();
+  // });
+
 
   world.on('post-solve', function(contact) {
     count++;
@@ -258,11 +254,7 @@ planck.testbed(function(testbed) {
     console.log("現在の壁への衝突回数は"+count+"回です");
     $('#data_view').html("現在の壁への衝突回数は"+count+"回です");
 
-    if(skill == 2){
-      var score = 4500 -count*100;
-    }else{
-      var score = 5000 - count*100;
-    }
+    score -= 100;
 
     $('#score').html("あなたの現在のスコアは<span>"+score+"<span>です！");
 
@@ -289,13 +281,7 @@ planck.testbed(function(testbed) {
       if (ball && pocket) {
         world.destroyBody(ball);
 
-        var $form = $('#form_area');
-        if(skill == 2){
-          count < 11 ? count = 0 : count;
-          score = 4500 -count*100;
-        }else{
-          score = 5000 - count*100;
-        }
+        timerStop();
 
         swal({
           title : "あなたのスコアは"+score+"です！",
@@ -402,17 +388,7 @@ planck.testbed(function(testbed) {
   return world;
 
 
-  // function row() {
-  //   var balls = [];
-  //   balls.push(Vec2(-width * .45, 0));
-  //   // balls.push(Vec2(-width * .3, -height * 0.2));
-  //   // balls.push(Vec2(-width * .3, +height * 0.2));
-  //   // balls.push(Vec2(-width * .1, -height * 0.1));
-  //   // balls.push(Vec2(-width * .1, +height * 0.1));
-  //   return balls;
-  // }
-
-  // OpwnWeatherMapの利用
+  /**---------- openweathermapの利用 ----------**/
   function weatherGet(){
     var cityName = ['Tokyo,jp','London,gb','Wellington,nz','Moscow,ru','Berlin,de','Nagoya,jp','Osaka,jp','Beijing,cn','Santiago,cl'];
 
@@ -448,7 +424,8 @@ planck.testbed(function(testbed) {
     });
   }
 
-  // 天気(clear,clouds,rain,snow)を英語から日本語へ変換
+
+  /**---------- 天気(clear,clouds,rain,snow)を英語から日本語へ変換 ----------**/
   function weatherEnToJp(weather,skill){
     console.log(weather);
 
@@ -469,11 +446,15 @@ planck.testbed(function(testbed) {
     }
   }
 
+
+  /**---------- 重力の強さを補正 ----------**/
   function windSpeedDataSet(windSpeed){
     // 仮
     return windSpeed*8;
   }
 
+
+  /**---------- 重力の向きを設定 ----------**/
   function windDegDataSet(windDeg){
     if(337.5 <= windDeg || windDeg < 22.5){
       return "北";
@@ -494,6 +475,8 @@ planck.testbed(function(testbed) {
     }
   }
 
+
+  /**---------- 重力の強さを設定 ----------**/
   function gravityNumberSet(windDegInfo,windSpeedInfo){
     var obj = new Object();
 
@@ -526,6 +509,8 @@ planck.testbed(function(testbed) {
     return obj;
   }
 
+
+  /**---------- ステージ情報欄にデータを格納 ----------**/
   function stageTitleSet(city,weather,windDeg,windSize){
     var $stageName = $('#stage_name');
     var weatherEn,windDegTag;
@@ -552,6 +537,8 @@ planck.testbed(function(testbed) {
     $stageName.find('#city').html(city);
   }
 
+
+  /**---------- URLから値取得 ----------**/
   function urlParamGet(){
     var arg = new Object;
     var url = location.search.substring(1).split('&');
@@ -564,6 +551,8 @@ planck.testbed(function(testbed) {
      return arg.counter_num;
   }
 
+
+  /**---------- 選択スキル情報の格納 ----------**/
   function skillDataSet(skillNumber){
     skillNumber == 1 ? (testbed.mouseForce = -150,skill = 1) : false;
     skillNumber == 2 ? skill = 2 : false;
@@ -573,12 +562,46 @@ planck.testbed(function(testbed) {
     return skill;
   }
 
+
+  /**---------- 壁衝突時の音 ----------**/
   function soundStart(){
     // 初回以外だったら音声ファイルを巻き戻す
     if(typeof(document.getElementById('audio').currentTime) != 'undefined' ){
       document.getElementById('audio').currentTime = 0;
     }
     $('#audio').get(0).play();
+  }
+
+
+  /**---------- タイマー ----------**/
+  function timerStart(){
+    remainTimer == 100 ? ($('#timer').text(remainTimer),scoreChange()) : false;
+    remainTimer == 0 ? timerStom() : false;
+    console.log(score);
+
+    timerID = setInterval(function(){
+      timerID <= 0 ? clearInterval(timerID) : timerCountDown();
+    },1000);
+  }
+
+  function timerCountDown(){
+    remainTimer--;
+    scoreChange();
+
+    pauseTimer = remainTimer;
+
+    $('#timer').text(remainTimer);
+  }
+
+  function timerStop(){
+    clearInterval(timerID);
+  }
+
+
+  /**---------- スコア変更 ----------**/
+  function scoreChange(){
+    score = 5000-count*100 + remainTimer*100;
+    $('#score').html("あなたの現在のスコアは<span>"+score+"<span>です！");
   }
 
   function scale(x, y) {
