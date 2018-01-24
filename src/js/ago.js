@@ -97,14 +97,132 @@ planck.testbed(function(testbed) {
       Vec2(-2,6)
     ];
   }else if(stage_id == "2th"){
+    var walls = [
+      Vec2(-15,-10),
+      Vec2(-15,10),
+      Vec2(15,10),
+      Vec2(15,-10)
+    ];
+
+    var obstacle_1 = [
+      Vec2(-8,-5),
+      Vec2(-8,5),
+      Vec2(8,5),
+      Vec2(8,-5)
+    ];
+
+    var obstacle_2 = [
+      Vec2(-15,-5),
+      Vec2(-15,-2),
+      Vec2(-11,-2),
+      Vec2(-11,-5)
+    ];
+
+    var obstacle_3 = [
+      Vec2(-12,2),
+      Vec2(-12,5),
+      Vec2(-8,5),
+      Vec2(-8,2)
+    ];
+
+    var obstacle_4 = [
+      Vec2(-8,5),
+      Vec2(-8,8),
+      Vec2(-2,8),
+      Vec2(-2,5),
+    ];
+
+    var obstacle_5 = [
+      Vec2(2,7),
+      Vec2(2,10),
+      Vec2(8,10),
+      Vec2(8,7),
+    ];
+
+    var obstacle_6 = [
+      Vec2(-8,-7),
+      Vec2(-8,-10),
+      Vec2(-2,-10),
+      Vec2(-2,-7)
+    ];
+
+    var obstacle_7 = [
+      Vec2(2,-5),
+      Vec2(2,-8),
+      Vec2(8,-8),
+      Vec2(8,-5),
+    ];
+
+    var obstacle_8 = [
+      Vec2(8,-5),
+      Vec2(8,-2),
+      Vec2(12,-2),
+      Vec2(12,-5)
+    ];
+
+    var obstacle_9 = [
+      Vec2(11,2),
+      Vec2(11,5),
+      Vec2(15,5),
+      Vec2(15,2)
+    ];
 
   }else if(stage_id == "3th"){
+    var walls = [
+      Vec2(-15,-10),
+      Vec2(-15,2),
+      Vec2(7.5,2),
+      Vec2(7.5,6),
+      Vec2(-15,6),
+      Vec2(-15,10),
+      Vec2(15,10),
+      Vec2(15,-2),
+      Vec2(-7.5,-2),
+      Vec2(-7.5,-6),
+      Vec2(15,-6),
+      Vec2(15,-10)
+    ];
+
+    var obstacle_1 = [
+      Vec2(0,-10),
+      Vec2(5,-8),
+      Vec2(10,-10)
+    ];
+
+    var obstacle_2 = [
+      Vec2(-7.5,-6),
+      Vec2(2.5,-6),
+      Vec2(-2.5,-8)
+    ];
+
+    var obstacle_3 = [
+      Vec2(-12.5,-4),
+      Vec2(-7.5,-2),
+      Vec2(-7.5,-6)
+    ];
+
+    var obstacle_4 = [
+      Vec2(-7.5,0),
+      Vec2(-7.5,2),
+      Vec2(0,2),
+      Vec2(0,0),
+    ];
+
+    var obstacle_5 = [
+      Vec2(2.5,-2),
+      Vec2(2.5,0),
+      Vec2(10,0),
+      Vec2(10,-2),
+    ];
+
+    var obstacle_6 = [
+      Vec2(10,10),
+      Vec2(10,2),
+      Vec2(15,2),
+      Vec2(15,10),
+    ];
 
   }else if(stage_id == "4th"){
-
-  }else if(stage_id == "5th"){
-
-  }else{
     var walls = [
       Vec2(0,-10),
       Vec2(0,5),
@@ -136,6 +254,10 @@ planck.testbed(function(testbed) {
       Vec2(8,1),
       Vec2(8,3)
     ];
+  }else if(stage_id == "5th"){
+
+  }else{
+
   }
 
   var wallFixDef = {
@@ -199,21 +321,27 @@ planck.testbed(function(testbed) {
   if(stage_id == "1th"){
     world.createBody().createFixture(pl.Circle(Vec2(-12.5,8), POCKET_R), pocketFixDef);
   }else if(stage_id == "2th"){
-
+    world.createBody().createFixture(pl.Circle(Vec2(13,8), POCKET_R), pocketFixDef);
   }else if(stage_id == "3th"){
-
+    world.createBody().createFixture(pl.Circle(Vec2(-13,8), POCKET_R), pocketFixDef);
   }else if(stage_id == "4th"){
-
+    world.createBody().createFixture(pl.Circle(Vec2(-13,7.5), POCKET_R), pocketFixDef);
   }else if(stage_id == "5th"){
 
   }else{
-    world.createBody().createFixture(pl.Circle(Vec2(-13,7.5), POCKET_R), pocketFixDef);
+
   }
 
   // 障害物の配置
   world.createBody().createFixture(pl.Chain(obstacle_1, true), obstacleFixDef);
   world.createBody().createFixture(pl.Chain(obstacle_2, true), obstacleFixDef);
   world.createBody().createFixture(pl.Chain(obstacle_3, true), obstacleFixDef);
+  world.createBody().createFixture(pl.Chain(obstacle_4, true), obstacleFixDef);
+  world.createBody().createFixture(pl.Chain(obstacle_5, true), obstacleFixDef);
+  world.createBody().createFixture(pl.Chain(obstacle_6, true), obstacleFixDef);
+  world.createBody().createFixture(pl.Chain(obstacle_7, true), obstacleFixDef);
+  world.createBody().createFixture(pl.Chain(obstacle_8, true), obstacleFixDef);
+  world.createBody().createFixture(pl.Chain(obstacle_9, true), obstacleFixDef);
 
   // 動く障害物を設置
   // m_platform_01 = world.createDynamicBody(Vec2(0,0));
@@ -249,11 +377,11 @@ planck.testbed(function(testbed) {
   if(stage_id == "1th"){
     ball.setPosition(Vec2(-14,-7.5));
   }else if(stage_id == "2th"){
-    ball.setPosition(Vec2(7.5,-9));
+    ball.setPosition(Vec2(-14,-9));
   }else if(stage_id == "3th"){
-    ball.setPosition(Vec2(7.5,-9));
+    ball.setPosition(Vec2(13,-8));
   }else if(stage_id == "4th"){
-    ball.setPosition(Vec2(7.5,-9));
+    ball.setPosition(Vec2(1.5,-8.5));
   }else if(stage_id == "5th"){
     ball.setPosition(Vec2(7.5,-9));
   }else{
