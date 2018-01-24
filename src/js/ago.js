@@ -27,7 +27,7 @@ planck.testbed(function(testbed) {
 
   // var PLAYER_R = 0.35;
   // var BALL_R = 0.23;
-  var BALL_R   = 0.50;
+  var BALL_R   = 0.55;
   var POCKET_R = 0.5;
   var CIRCLE_R = 1;
 
@@ -64,47 +64,79 @@ planck.testbed(function(testbed) {
     gravity : Vec2(gravityX,gravityY)
   });
 
-  var walls = [
-    Vec2(0,-10),
-    Vec2(0,5),
-    Vec2(-15,5),
-    Vec2(-15,10),
-    Vec2(15,10),
-    Vec2(15,-10)
-  ];
+  if(stage_id == "1th"){
+    var walls = [
+      Vec2(-15,-10),
+      Vec2(-15,-5),
+      Vec2(5,-5),
+      Vec2(5,3),
+      Vec2(-15,3),
+      Vec2(-15,10),
+      Vec2(15,10),
+      Vec2(15,-10)
+    ];
 
-  // 左下から時計回り？
-  var obstacle_1 = [
-    Vec2(0,-7),
-    Vec2(0,-5),
-    Vec2(8,-5),
-    Vec2(8,-7)
-  ];
+    var obstacle_1 = [
+      Vec2(8,-5),
+      Vec2(8,-2),
+      Vec2(15,-2),
+      Vec2(15,-5)
+    ];
 
-  var obstacle_2 = [
-    Vec2(7,-3),
-    Vec2(7,-1),
-    Vec2(15,-1),
-    Vec2(15,-3)
-  ];
+    var obstacle_2 = [
+      Vec2(5,3),
+      Vec2(5,8),
+      Vec2(13,8),
+      Vec2(13,3)
+    ];
 
-  // 左下から時計回り？
-  var obstacle_3 = [
-    Vec2(0,3),
-    Vec2(0,1),
-    Vec2(8,1),
-    Vec2(8,3)
-  ];
+    var obstacle_3 = [
+      Vec2(-10,6),
+      Vec2(-10,10),
+      Vec2(-2,10),
+      Vec2(-2,6)
+    ];
+  }else if(stage_id == "2th"){
 
-  //var circleObstacle_1 = world.createBody().createFixture(pl.circle(Vec2(-10,CIRCLE_R),obstacleFixDef);
-   // var goal = [
-   //   Vec2(0, -height * 0.2),
-   //   Vec2(0, +height * 0.2)
-   // ];
-  // var goal = [
-  //   Vec2(0, 0),
-  //   Vec2(0, 0)
-  // ];
+  }else if(stage_id == "3th"){
+
+  }else if(stage_id == "4th"){
+
+  }else if(stage_id == "5th"){
+
+  }else{
+    var walls = [
+      Vec2(0,-10),
+      Vec2(0,5),
+      Vec2(-15,5),
+      Vec2(-15,10),
+      Vec2(15,10),
+      Vec2(15,-10)
+    ];
+
+    // 左下から時計回り？
+    var obstacle_1 = [
+      Vec2(0,-7),
+      Vec2(0,-5),
+      Vec2(8,-5),
+      Vec2(8,-7)
+    ];
+
+    var obstacle_2 = [
+      Vec2(7,-3),
+      Vec2(7,-1),
+      Vec2(15,-1),
+      Vec2(15,-3)
+    ];
+
+    // 左下から時計回り？
+    var obstacle_3 = [
+      Vec2(0,3),
+      Vec2(0,1),
+      Vec2(8,1),
+      Vec2(8,3)
+    ];
+  }
 
   var wallFixDef = {
     friction: 0,
@@ -164,10 +196,19 @@ planck.testbed(function(testbed) {
 
   world.createBody().createFixture(pl.Chain(walls, true), wallFixDef);
 
-  // world.createBody(Vec2(-width * 0.5 - BALL_R, 0)).createFixture(pl.Chain(goal), goalFixDef);
-  // world.createBody(Vec2(+width * 0.5 + BALL_R, 0)).createFixture(pl.Chain(goal), goalFixDef);
+  if(stage_id == "1th"){
+    world.createBody().createFixture(pl.Circle(Vec2(-12.5,8), POCKET_R), pocketFixDef);
+  }else if(stage_id == "2th"){
 
-  world.createBody().createFixture(pl.Circle(Vec2(-14.2,7.5), POCKET_R), pocketFixDef);
+  }else if(stage_id == "3th"){
+
+  }else if(stage_id == "4th"){
+
+  }else if(stage_id == "5th"){
+
+  }else{
+    world.createBody().createFixture(pl.Circle(Vec2(-13,7.5), POCKET_R), pocketFixDef);
+  }
 
   // 障害物の配置
   world.createBody().createFixture(pl.Chain(obstacle_1, true), obstacleFixDef);
@@ -175,36 +216,50 @@ planck.testbed(function(testbed) {
   world.createBody().createFixture(pl.Chain(obstacle_3, true), obstacleFixDef);
 
   // 動く障害物を設置
-  m_platform_01 = world.createDynamicBody(Vec2(0,0));
-  m_platform_01.createFixture(pl.Box(.5, 2, Vec2(6,7), .5 * Math.PI), moveObstacleFixDef)
-  m_platform_01.setKinematic();
-  m_platform_01.setLinearVelocity(Vec2(-speed, 0));
-  m_platform_01.setAngularVelocity(0);
+  // m_platform_01 = world.createDynamicBody(Vec2(0,0));
+  // m_platform_01.createFixture(pl.Box(.5, 2, Vec2(6,7), .5 * Math.PI), moveObstacleFixDef)
+  // m_platform_01.setKinematic();
+  // m_platform_01.setLinearVelocity(Vec2(-speed, 0));
+  // m_platform_01.setAngularVelocity(0);
+  //
+  // m_platform_02 = world.createDynamicBody(Vec2(0,0));
+  // m_platform_02.createFixture(pl.Box(.5, 2, Vec2(6,7), 1 * Math.PI), moveObstacleFixDef)
+  // m_platform_02.setKinematic();
+  // m_platform_02.setLinearVelocity(Vec2(-speed, 0));
+  // m_platform_02.setAngularVelocity(0);
+  //
+  // m_platform_03 = world.createDynamicBody(Vec2(-2,2.5));
+  // m_platform_03.createFixture(pl.Box(.5, .5, Vec2(-2,4), .5 * Math.PI), moveObstacleFixDef)
+  // m_platform_03.setKinematic();
+  // m_platform_03.setLinearVelocity(Vec2(0, speed));
+  // m_platform_03.setAngularVelocity(0);
+  //
+  // m_platform_04 = world.createDynamicBody(Vec2(-6,2.5));
+  // m_platform_04.createFixture(pl.Box(.5, .5, Vec2(-2,4), .5 * Math.PI), moveObstacleFixDef)
+  // m_platform_04.setKinematic();
+  // m_platform_04.setLinearVelocity(Vec2(0, speed/2));
+  // m_platform_04.setAngularVelocity(0);
 
-  m_platform_02 = world.createDynamicBody(Vec2(0,0));
-  m_platform_02.createFixture(pl.Box(.5, 2, Vec2(6,7), 1 * Math.PI), moveObstacleFixDef)
-  m_platform_02.setKinematic();
-  m_platform_02.setLinearVelocity(Vec2(-speed, 0));
-  m_platform_02.setAngularVelocity(0);
-
-  m_platform_03 = world.createDynamicBody(Vec2(-2,2.5));
-  m_platform_03.createFixture(pl.Box(.5, .5, Vec2(-2,4), .5 * Math.PI), moveObstacleFixDef)
-  m_platform_03.setKinematic();
-  m_platform_03.setLinearVelocity(Vec2(0, speed));
-  m_platform_03.setAngularVelocity(0);
-
-  m_platform_04 = world.createDynamicBody(Vec2(-6,2.5));
-  m_platform_04.createFixture(pl.Box(.5, .5, Vec2(-2,4), .5 * Math.PI), moveObstacleFixDef)
-  m_platform_04.setKinematic();
-  m_platform_04.setLinearVelocity(Vec2(0, speed/2));
-  m_platform_04.setAngularVelocity(0);
-
-  m_platform_04.lineThickness = 10;
+  // m_platform_04.lineThickness = 10;
 
   // ボールの初期位置を設定
   var ball = world.createDynamicBody(ballBodyDef);
   ball.createFixture(pl.Circle(BALL_R), ballFixDef);
-  ball.setPosition(Vec2(7.5,-9));
+
+  if(stage_id == "1th"){
+    ball.setPosition(Vec2(-14,-7.5));
+  }else if(stage_id == "2th"){
+    ball.setPosition(Vec2(7.5,-9));
+  }else if(stage_id == "3th"){
+    ball.setPosition(Vec2(7.5,-9));
+  }else if(stage_id == "4th"){
+    ball.setPosition(Vec2(7.5,-9));
+  }else if(stage_id == "5th"){
+    ball.setPosition(Vec2(7.5,-9));
+  }else{
+    ball.setPosition(Vec2(1.5,-8.5));
+  }
+
   ball.render = {fill: 'white', stroke : 'green'};
 
   // row().forEach(function(p) {
@@ -330,50 +385,50 @@ planck.testbed(function(testbed) {
       },(Math.abs(gravityX)+Math.abs(gravityY))*2);
     }
 
-    // 障害物を動かす
-    if (m_platform_01.isKinematic()) {
-      var p1 = m_platform_01.getTransform().p;
-      var v1 = m_platform_01.getLinearVelocity();
-
-      // if ((p.x < -5.0 && v.x < 0.0) || (p.x > 5.0 && v.x > 0.0)) {
-      if ((p1.x < 0 && v1.x < 0) || (p1.x > 5.0 && v1.x > 0.0)) {
-        v1.x = -v1.x;
-        m_platform_01.setLinearVelocity(v1);
-      }
-    }
-
-    if (m_platform_02.isKinematic()) {
-      var p2 = m_platform_02.getTransform().p;
-      var v2 = m_platform_02.getLinearVelocity();
-
-      // if ((p.x < -5.0 && v.x < 0.0) || (p.x > 5.0 && v.x > 0.0)) {
-      if ((p2.x < 0 && v2.x < 0) || (p2.x > 5.0 && v2.x > 0.0)) {
-        v2.x = -v2.x;
-        m_platform_02.setLinearVelocity(v2);
-      }
-    }
-
-    if (m_platform_03.isKinematic()) {
-      var p3 = m_platform_03.getTransform().p;
-      var v3 = m_platform_03.getLinearVelocity();
-
-      // if ((p.x < -5.0 && v.x < 0.0) || (p.x > 5.0 && v.x > 0.0)) {
-      if ((p3.y < 2.5 && v3.y < 0) || (p3.y > 4.5 && v3.y > 0)) {
-        v3.y = -v3.y;
-        m_platform_03.setLinearVelocity(v3);
-      }
-    }
-
-    if (m_platform_04.isKinematic()) {
-      var p4 = m_platform_04.getTransform().p;
-      var v4 = m_platform_04.getLinearVelocity();
-
-      // if ((p.x < -5.0 && v.x < 0.0) || (p.x > 5.0 && v.x > 0.0)) {
-      if ((p4.y < 2.5 && v4.y < 0) || (p4.y > 4.5 && v4.y > 0)) {
-        v4.y = -v4.y;
-        m_platform_04.setLinearVelocity(v4);
-      }
-    }
+    // // 障害物を動かす
+    // if (m_platform_01.isKinematic()) {
+    //   var p1 = m_platform_01.getTransform().p;
+    //   var v1 = m_platform_01.getLinearVelocity();
+    //
+    //   // if ((p.x < -5.0 && v.x < 0.0) || (p.x > 5.0 && v.x > 0.0)) {
+    //   if ((p1.x < 0 && v1.x < 0) || (p1.x > 5.0 && v1.x > 0.0)) {
+    //     v1.x = -v1.x;
+    //     m_platform_01.setLinearVelocity(v1);
+    //   }
+    // }
+    //
+    // if (m_platform_02.isKinematic()) {
+    //   var p2 = m_platform_02.getTransform().p;
+    //   var v2 = m_platform_02.getLinearVelocity();
+    //
+    //   // if ((p.x < -5.0 && v.x < 0.0) || (p.x > 5.0 && v.x > 0.0)) {
+    //   if ((p2.x < 0 && v2.x < 0) || (p2.x > 5.0 && v2.x > 0.0)) {
+    //     v2.x = -v2.x;
+    //     m_platform_02.setLinearVelocity(v2);
+    //   }
+    // }
+    //
+    // if (m_platform_03.isKinematic()) {
+    //   var p3 = m_platform_03.getTransform().p;
+    //   var v3 = m_platform_03.getLinearVelocity();
+    //
+    //   // if ((p.x < -5.0 && v.x < 0.0) || (p.x > 5.0 && v.x > 0.0)) {
+    //   if ((p3.y < 2.5 && v3.y < 0) || (p3.y > 4.5 && v3.y > 0)) {
+    //     v3.y = -v3.y;
+    //     m_platform_03.setLinearVelocity(v3);
+    //   }
+    // }
+    //
+    // if (m_platform_04.isKinematic()) {
+    //   var p4 = m_platform_04.getTransform().p;
+    //   var v4 = m_platform_04.getLinearVelocity();
+    //
+    //   // if ((p.x < -5.0 && v.x < 0.0) || (p.x > 5.0 && v.x > 0.0)) {
+    //   if ((p4.y < 2.5 && v4.y < 0) || (p4.y > 4.5 && v4.y > 0)) {
+    //     v4.y = -v4.y;
+    //     m_platform_04.setLinearVelocity(v4);
+    //   }
+    // }
   }
 
   return world;
@@ -547,7 +602,7 @@ planck.testbed(function(testbed) {
   function skillDataSet(skillNumber){
     skillNumber == 1 ? (testbed.mouseForce = -150,skill = 1) : false;
     skillNumber == 2 ? skill = 2 : false;
-    skillNumber == 3 ? (POCKET_R = 0.75,skill = 3) : false;
+    skillNumber == 3 ? (POCKET_R = 1.5,skill = 3) : false;
     skillNumber == 4 ? skill = 4 : false;
     $('#skill').addClass('skill_'+skill);
     return skill;
