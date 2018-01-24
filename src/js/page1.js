@@ -6,7 +6,7 @@ class App_start extends React.Component{
     return(
       <div>
         <div className="henko">
-          <a className="connect txC" href="page2.html">
+          <a className="connect txC" href="stage_select.html">
             START
           </a>
         </div>

@@ -67,6 +67,11 @@ module.exports = {
       filename: 'page3.html',
       template: './pug/page3.pug'
     }),
+    new htmlWebpackPlugin({
+      title:    'stage_select',
+      filename: 'stage_select.html',
+      template: './pug/stage_select.pug'
+    }),
     /*
     new htmlWebpackPlugin({
       title: 'AGO',
