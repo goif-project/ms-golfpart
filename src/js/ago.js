@@ -457,6 +457,9 @@ planck.testbed(function(testbed) {
 
         timerStop();
 
+        // 壁反射減を選択時
+        skill == 2 && count <= 10 ? score += count*100 : score += 1000;
+
         swal({
           title : "あなたのスコアは"+score+"です！",
           text  : "登録したいユーザー名を入力してください",
