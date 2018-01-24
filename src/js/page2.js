@@ -122,8 +122,9 @@ ReactDOM.render(
 
 $(function(){
   var param = urlParamGet();
-  console.log(param.id);
-  $('#my_form').attr('action', "page3.html?id="+param.id);
+  console.log(param.stage_id);
+  $('#my_form').attr('action', "page3.html?id="+param.stage_id);
+  $('#stage_id').val(param.stage_id);
 });
 
 /**---------- URLから値取得 ----------**/
