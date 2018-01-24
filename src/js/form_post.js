@@ -9,7 +9,9 @@ function btn_post(){
     var neet = parameters[1].split("=");
     console.log(neet);
     var neet1 = neet[1];
-    sessionStorage.setItem("stage_id",neet1);
+    if(neet[0] == "stage_id"){
+      sessionStorage.setItem("stage_id",neet1);
+    }
 
     var str = $(':hidden[name="counter_num"]').val();
     sessionStorage.setItem(['char_post'],[str]);

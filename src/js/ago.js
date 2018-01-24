@@ -8,6 +8,9 @@ const swal = require("sweetalert");
 planck.testbed(function(testbed) {
   $('canvas').attr('id','stage');
 
+  // ステージ番号
+  var stage_id = sessionStorage.getItem("stage_id")
+
   var pl = planck, Vec2 = pl.Vec2, Math = pl.Math;
   var SPI4 = Math.sin(Math.PI / 4), SPI3 = Math.sin(Math.PI / 3);
 
