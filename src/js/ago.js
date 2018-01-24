@@ -56,27 +56,6 @@ planck.testbed(function(testbed) {
   // タイマー開始
   timerStart();
 
-  /////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////
-  /**---------- データベースから一覧取得(あとで削除) ----------**/
-  $.ajax({
-    type: "POST",
-    url: "http://mayomayooo.sakura.ne.jp/golf_db/select_score_all.php",
-    dataType : "json",
-    cache: "false"
-  }).done(function(data){
-    //  保存成功をアラート表示
-    console.log("あごおお");
-    console.log(data);
-
-  }).fail(function(XMLHttpRequest, textStatus, errorThrown){
-    console.log(XMLHttpRequest);
-    console.log(textStatus);
-    console.log(errorThrown);
-  });
-  /////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////
-
   var world = pl.World({
     // 重力の設定(x,y)
     gravity : Vec2(gravityX,gravityY)

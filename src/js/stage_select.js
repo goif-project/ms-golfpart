@@ -1,13 +1,9 @@
 const $ = require("jquery");
 
-$(function (){
-  function stageSelect(){
-    location.pathname == '/stage_select'
-      ? console.log("agoo")
-      : false;
-  }
-
-  console.log("aaa");
-
-  stageSelect();
+$(function(){
+  window.location.href.split('/').pop() == 'stage_select.html'
+    ?
+      console.log("agooo")
+    :
+      console.log("agnnn")
 });
