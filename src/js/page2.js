@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import $ from 'jquery'
 
 class Button extends React.Component{
   localHandleClick(){
@@ -116,4 +117,24 @@ class Main extends React.Component{
 ReactDOM.render(
   <Main />,
   document.getElementById("page2")
- )
+)
+
+
+$(function(){
+  var param = urlParamGet();
+  console.log(param.id);
+  $('#my_form').attr('action', "page3.html?id="+param.id);
+});
+
+/**---------- URLから値取得 ----------**/
+function urlParamGet(){
+  var arg = new Object;
+  var url = location.search.substring(1).split('&');
+
+  for(var i=0; url[i]; i++){
+    var k = url[i].split('=');
+    arg[k[0]] = k[1];
+  }
+
+   return arg;
+}
