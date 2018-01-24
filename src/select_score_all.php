@@ -5,7 +5,7 @@ header('Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Ac
 //  DB接続
 require_once('db_connect.php');
 
-$stmt = $pdo->prepare("SELECT * FROM total_score ORDER BY total_score_id ASC");
+$stmt = $pdo->prepare("SELECT * FROM total_score ORDER BY score DESC");
 $stmt->execute();
 $result = $stmt->fetchAll();
 //$resurt = $stmt->fetchAll();
