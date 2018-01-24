@@ -627,7 +627,7 @@ planck.testbed(function(testbed) {
   /**---------- 重力の強さを補正 ----------**/
   function windSpeedDataSet(windSpeed){
     // 仮
-    return windSpeed*8;
+    return windSpeed*4;
   }
 
 
