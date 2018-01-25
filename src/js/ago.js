@@ -465,13 +465,13 @@ planck.testbed(function(testbed) {
           text  : "登録したいユーザー名を入力してください",
           type  : "success",
           content : "input",
-          closeOnClickOutside: false
+          closeOnClickOutside: false,
         }).then((value) => {
           swal({
             title : value,
             text  : "上記の名前で登録します！",
             type  : "success",
-            closeOnClickOutside: false
+            closeOnClickOutside: false,
           }).then((isConfirm) => {
             // $('user_name').val(value);
             // $('user_score').val(score);
@@ -488,7 +488,7 @@ planck.testbed(function(testbed) {
               //  保存成功をアラート表示
               console.log("データの保存に成功しました");
 
-              window.location.href = "/";
+              window.location.href = "index.html";
 
             }).fail(function(XMLHttpRequest, textStatus, errorThrown){
               console.log("失敗！");
