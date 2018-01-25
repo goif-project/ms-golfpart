@@ -19,3 +19,5 @@
 `npm start`のwebで見るとindexの画像が表示されない
 →移行するmonacaには画像があるので、大丈夫！！
 [monaca追加済みgithub](https://github.com/goif-project/monaca-golf-play)
+
+tsts
