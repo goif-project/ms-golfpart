@@ -758,7 +758,7 @@ planck.testbed(function(testbed) {
     console.log(score);
 
     timerID = setInterval(function(){
-      remainTimer <= 0 ? clearInterval(timerID) : timerCountDown();
+      remainTimer <= 0 ? (clearInterval(timerID),gameoverAlert()) : timerCountDown();
     },1000);
   }
 
@@ -780,6 +780,22 @@ planck.testbed(function(testbed) {
   function scoreChange(){
     score = 5000-count*100 + remainTimer*100;
     $('#score').html("あなたの現在のスコアは<span>"+score+"<span>です！");
+  }
+
+
+  /**---------- タイム切れ(ゲームオーバー) ----------**/
+  function gameoverAlert(){
+    swal({
+      title: "残念！時間切れです...。",
+      text : "是非またチャレンジしてください！",
+      icon : "error",
+      closeOnClickOutside: false,
+      buttons : {
+        ok: 'トップへ戻る'
+      }
+    }).then((value) => {
+      window.location.href = 'index.html'
+    });
   }
 
   function scale(x, y) {
