@@ -711,7 +711,8 @@ planck.testbed(function(testbed) {
     $stageName.find('#wind_icon').addClass(windDegTag);
 
     // 都市名をセット
-    $stageName.find('#city').html(city);
+    // $stageName.find('#city').html(city);
+    $stageName.find('#city').html("ステージ"+stage_id.substr(0,1));
   }
 
 
