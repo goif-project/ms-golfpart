@@ -56,8 +56,20 @@ planck.testbed(function(testbed) {
   skill = skillDataSet(urlParamGet());
   weatherGet();
 
-  // タイマー開始
-  timerStart();
+
+  // ページ遷移時に説明用アラート表示
+  swal({
+    title : "HOME GOLFについて",
+    text  : "制限時間は100秒！\nボールを引っ張って壁にぶつからずにカップを目指そう！",
+    icon  : "info",
+    closeOnClickOutside: false,
+    buttons : {
+      ok : "ゲームスタート！"
+    }
+  }).then((value) => {
+    // タイマー開始
+    timerStart();
+  });
 
   var world = pl.World({
     // 重力の設定(x,y)
