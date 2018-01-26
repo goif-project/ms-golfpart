@@ -458,7 +458,13 @@ planck.testbed(function(testbed) {
         timerStop();
 
         // 壁反射減を選択時
-        skill == 2 && count <= 10 ? score += count*100 : score += 1000;
+        if(skill == 2){
+          if(count <= 10){
+            score += count*100
+          }else{
+            score += 1000
+          }
+        }
 
         swal({
           title : "あなたのスコアは"+score+"です！",
