@@ -495,10 +495,15 @@ planck.testbed(function(testbed) {
             data: param,
             cache: "false"
             }).done(function(){
-              //  保存成功をアラート表示
-              console.log("データの保存に成功しました");
 
-              window.location.href = "index.html";
+              swal({
+                title : "ゲームクリア！",
+                text  : "ランキングも確認してみましょう！",
+                icon  : "success",
+                closeOnClickOutside: false,
+              }).then((isConfirm) => {
+                window.location.href = "index.html";
+              });
 
             }).fail(function(XMLHttpRequest, textStatus, errorThrown){
               console.log("失敗！");
