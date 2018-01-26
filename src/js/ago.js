@@ -266,10 +266,6 @@ planck.testbed(function(testbed) {
       Vec2(8,1),
       Vec2(8,3)
     ];
-  }else if(stage_id == "5th"){
-
-  }else{
-
   }
 
   var wallFixDef = {
@@ -304,9 +300,10 @@ planck.testbed(function(testbed) {
     density: .5,
     userData : 'ball'
   };
+
   var ballBodyDef = {
     bullet: true,
-    linearDamping : 5.5,
+    linearDamping : 10,
     angularDamping : 1.6
   };
 
@@ -338,10 +335,6 @@ planck.testbed(function(testbed) {
     world.createBody().createFixture(pl.Circle(Vec2(-13,8), POCKET_R), pocketFixDef);
   }else if(stage_id == "4th"){
     world.createBody().createFixture(pl.Circle(Vec2(-13,7.5), POCKET_R), pocketFixDef);
-  }else if(stage_id == "5th"){
-
-  }else{
-
   }
 
   // 障害物の配置
@@ -394,10 +387,6 @@ planck.testbed(function(testbed) {
     ball.setPosition(Vec2(13,-8));
   }else if(stage_id == "4th"){
     ball.setPosition(Vec2(1.5,-8.5));
-  }else if(stage_id == "5th"){
-    ball.setPosition(Vec2(7.5,-9));
-  }else{
-    ball.setPosition(Vec2(1.5,-8.5));
   }
 
   ball.render = {fill: 'white', stroke : 'green'};
@@ -416,16 +405,6 @@ planck.testbed(function(testbed) {
   //   player.createFixture(pl.Circle(PLAYER_R), playerFixDef);
   //   player.render = {fill : '#ff411a', stroke: 'black'};
   // });
-
-
-  var mouse = {
-    startX: 0,
-    startY: 0,
-    x: 0,
-    y: 0,
-    color: "black",
-    isDrawing: false
-  };
 
   // $('#overlay_delete').on('click', function(){
   //   $('.overlay').hide();
