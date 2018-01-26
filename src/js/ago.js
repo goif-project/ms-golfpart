@@ -473,6 +473,10 @@ planck.testbed(function(testbed) {
           content : "input",
           closeOnClickOutside: false,
         }).then((value) => {
+          if(value == ''){
+            value = "ななしのごんべえ";
+          }
+
           swal({
             title : value,
             text  : "上記の名前で登録します！",
